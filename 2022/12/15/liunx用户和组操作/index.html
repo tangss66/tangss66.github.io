@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>liunx用户和组操作 | </title><meta name="author" content="shi-nian"><meta name="copyright" content="shi-nian"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="linux 用户和组linux 用户linux 有三种用户：  root(超级管理员)，uid为0，有非常大的权限 系统用户， 一般不会登入 普通用户，Ubuntu中普通用户的uid从1000开始编码  &#x2F;etc&#x2F;passwd,用户信息&#x2F;etc&#x2F;shadow,用户密码 切换用户1su [-l] 用户名 创建和删除用户可以使用useradd&#x2F;adduser 来创建用户, 创建和删除用户都需要管理员权">
+<meta property="og:type" content="article">
+<meta property="og:title" content="liunx用户和组操作">
+<meta property="og:url" content="http://example.com/2022/12/15/liunx%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="linux 用户和组linux 用户linux 有三种用户：  root(超级管理员)，uid为0，有非常大的权限 系统用户， 一般不会登入 普通用户，Ubuntu中普通用户的uid从1000开始编码  &#x2F;etc&#x2F;passwd,用户信息&#x2F;etc&#x2F;shadow,用户密码 切换用户1su [-l] 用户名 创建和删除用户可以使用useradd&#x2F;adduser 来创建用户, 创建和删除用户都需要管理员权">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2022-12-15T15:32:59.000Z">
+<meta property="article:modified_time" content="2022-12-15T16:56:48.134Z">
+<meta property="article:author" content="shi-nian">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/12/15/liunx%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84%E6%93%8D%E4%BD%9C/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'liunx用户和组操作',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-12-16 00:56:48'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/"></a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">liunx用户和组操作</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-15T15:32:59.000Z" title="发表于 2022-12-15 23:32:59">2022-12-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-12-15T16:56:48.134Z" title="更新于 2022-12-16 00:56:48">2022-12-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="liunx用户和组操作"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="linux-用户和组"><a href="#linux-用户和组" class="headerlink" title="linux 用户和组"></a>linux 用户和组</h1><h2 id="linux-用户"><a href="#linux-用户" class="headerlink" title="linux 用户"></a>linux 用户</h2><p>linux 有三种用户：</p>
+<ol>
+<li>root(超级管理员)，uid为0，有非常大的权限</li>
+<li>系统用户， 一般不会登入</li>
+<li>普通用户，Ubuntu中普通用户的uid从1000开始编码</li>
+</ol>
+<p>/etc/passwd,用户信息<br>/etc/shadow,用户密码</p>
+<h2 id="切换用户"><a href="#切换用户" class="headerlink" title="切换用户"></a>切换用户</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su [-l] 用户名</span><br></pre></td></tr></table></figure>
+<h2 id="创建和删除用户"><a href="#创建和删除用户" class="headerlink" title="创建和删除用户"></a>创建和删除用户</h2><p>可以使用useradd/adduser 来创建用户, 创建和删除用户都需要管理员权限<br>useradd使用默认设置； adduser可以手动添加设置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su - #切换管理员用户</span><br><span class="line">useradd 用户名</span><br></pre></td></tr></table></figure>
+
+<p>使用userdel/deluser 来删除用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userdel 用户名</span><br></pre></td></tr></table></figure>
+
+<h2 id="更改用户密码"><a href="#更改用户密码" class="headerlink" title="更改用户密码"></a>更改用户密码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd 用户名  </span><br></pre></td></tr></table></figure>
+
+<h2 id="修改用户信息"><a href="#修改用户信息" class="headerlink" title="修改用户信息"></a>修改用户信息</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">usermod [参数] [用户名]</span><br><span class="line">-l 新用户名</span><br><span class="line">-u 新用户id</span><br><span class="line">-d 用户家目录位置</span><br><span class="line">-g 用户所属主组</span><br><span class="line">-G 用户所属附属组</span><br><span class="line">-L 锁定用户使其不能登录</span><br><span class="line">-U 解除锁定</span><br><span class="line">-f 强制</span><br></pre></td></tr></table></figure>
+<h2 id="用户监控"><a href="#用户监控" class="headerlink" title="用户监控"></a>用户监控</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">w：显示有哪些用户已经登陆并且在干什么</span><br><span class="line">who：显示有哪些用户已经登录系统</span><br><span class="line">whoami：显示当前用户</span><br><span class="line">id：查看用户id</span><br><span class="line">cat /etc/passwd ： 查看全部用户</span><br></pre></td></tr></table></figure>
+
+<h2 id="用户组"><a href="#用户组" class="headerlink" title="用户组"></a>用户组</h2><p>组是用户的集合，通过组我们可以更加方便的归类，管理用户。每个组都有一个组ID，每个用户拥有一个主组，同时还可以拥有一个多个附属组<br>主组一般与用户名相同<br>/etc/group,用户组信息；<br>/etc/gshadow,组密码；</p>
+<h2 id="创建和删除用户组"><a href="#创建和删除用户组" class="headerlink" title="创建和删除用户组"></a>创建和删除用户组</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">groupadd [组名] #创建组</span><br><span class="line">groupdel [组名] #删除组</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改组的信息"><a href="#修改组的信息" class="headerlink" title="修改组的信息"></a>修改组的信息</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">groupmod [组名]</span><br><span class="line">-n 重命名</span><br><span class="line">-g 更改gid</span><br><span class="line">-o 允许使用重复的uid</span><br><span class="line">-p 设置密码</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看组中的用户"><a href="#查看组中的用户" class="headerlink" title="查看组中的用户"></a>查看组中的用户</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getent group [组名]</span><br></pre></td></tr></table></figure>
+
+<h2 id="将用户添加到用户组"><a href="#将用户添加到用户组" class="headerlink" title="将用户添加到用户组"></a>将用户添加到用户组</h2><ol>
+<li><p>使用usermod更改用户所属的组</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">usemod -G [组名1,组名2,...] [用户名] #组和用户需要已存在</span><br><span class="line">#-g 改变用户的主要组</span><br></pre></td></tr></table></figure></li>
+<li><p>使用gpasswd将一个或多个用户添加到用户组</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gpasswd -M [用户名1,用户名2,...] [组名]</span><br><span class="line"># -d 可以从组中删除用户</span><br></pre></td></tr></table></figure>
+<p>注意，使用gpasswd向组中添加用户时会覆盖当前与组关联的现有用户。</p>
+</li>
+</ol>
+<p>3.可以通过编辑/etc/group手动向组中添加用户</p>
+<h2 id="sudo-命令和添加sudoer"><a href="#sudo-命令和添加sudoer" class="headerlink" title="sudo 命令和添加sudoer"></a>sudo 命令和添加sudoer</h2><p>sudo允许普通用户在自己的账户控制下使用一些需要管理员权限的命令和操作<br>首先需要将普通用户添加到sudoers中，这一步需要管理员权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su</span><br><span class="line">vim /etc/sudoers</span><br></pre></td></tr></table></figure>
+<p>在sudoers中找到’root ALL=(ALL)ALL’, 在它下面添加一行’用户名 ALL=(ALL)ALL’<br>完成后按Esc进入命令模式，按:wq!保存并退出。</p>
+<p>之后可以使用’sudo command’来使用命令</p>
+<h2 id="文件的权限"><a href="#文件的权限" class="headerlink" title="文件的权限"></a>文件的权限</h2><p>文件权限属性包含10个字符,例如：-rw-rw-r–<br>第一个字符表示文件类型：</p>
+<ul>
+<li>普通文件<br>d 目录<br>l 符号链接<br>c 字符设备文件<br>b 快设备文件</li>
+</ul>
+<p>后面三个字符为一组，分别代表文件所有者，所有者所在的组和其他人的读(r)、写(w)、执行权限(x)</p>
+<h2 id="chmod-可以更改权限"><a href="#chmod-可以更改权限" class="headerlink" title="chmod 可以更改权限"></a>chmod 可以更改权限</h2><p>0 000 —<br>1 001 –x<br>2 010 -w-<br>3 011 -wx<br>4 100 r–<br>5 101 r-x<br>6 110 rw-<br>7 111 rwx</p>
+<p>例如 ‘chmod 644 ls.txt’ 更改权限为-rw-r–r–  </p>
+<h2 id="chown-更改文件所有者和用户组"><a href="#chown-更改文件所有者和用户组" class="headerlink" title="chown 更改文件所有者和用户组"></a>chown 更改文件所有者和用户组</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown [owner][:[group]] file</span><br></pre></td></tr></table></figure>
+<p>和chown类似，chgrp可以更改用户组所有权</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">shi-nian</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/12/15/liunx%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84%E6%93%8D%E4%BD%9C/">http://example.com/2022/12/15/liunx%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84%E6%93%8D%E4%BD%9C/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank"></a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/12/16/linux%E8%BF%9B%E7%A8%8B/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">linux进程</div></div></a></div><div class="next-post pull-right"><a href="/2022/12/15/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%92%8C%E6%93%8D%E4%BD%9C/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">linux1</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">shi-nian</div><div class="author-info__description">share bioinformatic technology and articles</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#linux-%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84"><span class="toc-number">1.</span> <span class="toc-text">linux 用户和组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#linux-%E7%94%A8%E6%88%B7"><span class="toc-number">1.1.</span> <span class="toc-text">linux 用户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E7%94%A8%E6%88%B7"><span class="toc-number">1.2.</span> <span class="toc-text">切换用户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7"><span class="toc-number">1.3.</span> <span class="toc-text">创建和删除用户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81"><span class="toc-number">1.4.</span> <span class="toc-text">更改用户密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="toc-number">1.5.</span> <span class="toc-text">修改用户信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%9B%91%E6%8E%A7"><span class="toc-number">1.6.</span> <span class="toc-text">用户监控</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%BB%84"><span class="toc-number">1.7.</span> <span class="toc-text">用户组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7%E7%BB%84"><span class="toc-number">1.8.</span> <span class="toc-text">创建和删除用户组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E7%BB%84%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="toc-number">1.9.</span> <span class="toc-text">修改组的信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%BB%84%E4%B8%AD%E7%9A%84%E7%94%A8%E6%88%B7"><span class="toc-number">1.10.</span> <span class="toc-text">查看组中的用户</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E5%88%B0%E7%94%A8%E6%88%B7%E7%BB%84"><span class="toc-number">1.11.</span> <span class="toc-text">将用户添加到用户组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sudo-%E5%91%BD%E4%BB%A4%E5%92%8C%E6%B7%BB%E5%8A%A0sudoer"><span class="toc-number">1.12.</span> <span class="toc-text">sudo 命令和添加sudoer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E6%9D%83%E9%99%90"><span class="toc-number">1.13.</span> <span class="toc-text">文件的权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#chmod-%E5%8F%AF%E4%BB%A5%E6%9B%B4%E6%94%B9%E6%9D%83%E9%99%90"><span class="toc-number">1.14.</span> <span class="toc-text">chmod 可以更改权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#chown-%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E6%89%80%E6%9C%89%E8%80%85%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84"><span class="toc-number">1.15.</span> <span class="toc-text">chown 更改文件所有者和用户组</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/12/16/linux%E8%BF%9B%E7%A8%8B/" title="linux进程"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="linux进程"/></a><div class="content"><a class="title" href="/2022/12/16/linux%E8%BF%9B%E7%A8%8B/" title="linux进程">linux进程</a><time datetime="2022-12-15T16:56:22.000Z" title="发表于 2022-12-16 00:56:22">2022-12-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/15/liunx%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84%E6%93%8D%E4%BD%9C/" title="liunx用户和组操作"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="liunx用户和组操作"/></a><div class="content"><a class="title" href="/2022/12/15/liunx%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84%E6%93%8D%E4%BD%9C/" title="liunx用户和组操作">liunx用户和组操作</a><time datetime="2022-12-15T15:32:59.000Z" title="发表于 2022-12-15 23:32:59">2022-12-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/15/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%92%8C%E6%93%8D%E4%BD%9C/" title="linux1"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="linux1"/></a><div class="content"><a class="title" href="/2022/12/15/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%92%8C%E6%93%8D%E4%BD%9C/" title="linux1">linux1</a><time datetime="2022-12-15T07:18:03.000Z" title="发表于 2022-12-15 15:18:03">2022-12-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/09/hi-c/" title="hi-c"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hi-c"/></a><div class="content"><a class="title" href="/2022/12/09/hi-c/" title="hi-c">hi-c</a><time datetime="2022-12-09T10:17:13.000Z" title="发表于 2022-12-09 18:17:13">2022-12-09</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By shi-nian</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
