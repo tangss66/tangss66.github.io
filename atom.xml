@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-12-17T06:30:00.086Z</updated>
+  <updated>2022-12-17T07:04:07.319Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,14 +21,15 @@
     <link href="http://example.com/2022/12/17/DNAcopy/"/>
     <id>http://example.com/2022/12/17/DNAcopy/</id>
     <published>2022-12-17T06:03:00.000Z</published>
-    <updated>2022-12-17T06:30:00.086Z</updated>
+    <updated>2022-12-17T07:04:07.319Z</updated>
     
-    <content type="html"><![CDATA[<iframe src="/Rmarkdown_html/DNAcopy.html" height='100%' width='1000'></iframe>]]></content>
+    <content type="html"><![CDATA[<iframe src="/Rmarkdown_html/DNAcopy.html" id="myiframe" height="3600" width="100%" scrolling="no" frameborder="0"></iframe>]]></content>
     
     
       
       
-    <summary type="html">&lt;iframe src=&quot;/Rmarkdown_html/DNAcopy.html&quot; height=&#39;100%&#39; width=&#39;1000&#39;&gt;&lt;/iframe&gt;
+    <summary type="html">&lt;iframe src=&quot;/Rmarkdown_html/DNAcopy.html&quot; id=&quot;myiframe&quot; height=&quot;3600&quot; width=&quot;100%&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+
 </summary>
       
     

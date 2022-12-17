@@ -4,6 +4,6 @@ http://example.com/2022/12/09/hi-c/
 http://example.com/2022/12/15/liunx%E7%94%A8%E6%88%B7%E5%92%8C%E7%BB%84%E6%93%8D%E4%BD%9C/
 http://example.com/2022/12/16/linux%E8%BF%9B%E7%A8%8B/
 http://example.com/
+http://example.com/tags/bioinformatic/
 http://example.com/tags/linux/
 http://example.com/tags/R/
-http://example.com/tags/bioinformatic/
